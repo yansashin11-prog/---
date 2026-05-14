@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Камень & Звёзды — Астрологические украшения</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --sand: #F5EFE0; --sand2: #EDE3CC; --clay: #C4A882; --clay2: #8B6F4E;
+    --terracotta: #B86A3C; --stone: #6B5C4E; --dark: #2C1F14;
+    --cream: #FAF6EE; --gold: #C9A84C; --mist: #E8DFD0;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--dark); overflow-x: hidden; }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 5%; background: rgba(250,246,238,0.92);
+    backdrop-filter: blur(10px); border-bottom: 1px solid var(--sand2);
+  }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; letter-spacing: 0.08em; color: var(--clay2); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--stone); transition: color 0.2s; }
+  .nav-links a:hover { color: var(--terracotta); }
+  .nav-cta { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.6rem 1.6rem; border: 1px solid var(--clay); background: transparent; color: var(--clay2); cursor: pointer; transition: all 0.25s; }
+  .nav-cta:hover { background: var(--clay); color: var(--cream); }
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 0 5%; padding-top: 5rem; background: linear-gradient(135deg, var(--cream) 60%, var(--sand) 100%); position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -10%; right: -5%; width: 55%; height: 120%; background: radial-gradient(ellipse at 60% 40%, var(--sand2) 0%, transparent 70%); pointer-events: none; }
+  .hero-text { position: relative; z-index: 2; }
+  .hero-badge { display: inline-block; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--terracotta); border: 1px solid var(--terracotta); padding: 0.35rem 1rem; margin-bottom: 2rem; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 5vw, 4.5rem); font-weight: 300; line-height: 1.1; color: var(--dark); margin-bottom: 1.5rem; }
+  .hero-title em { font-style: italic; color: var(--clay2); }
+  .hero-sub { font-size: 0.95rem; line-height: 1.8; color: var(--stone); max-width: 440px; margin-bottom: 2.5rem; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary { padding: 0.9rem 2.4rem; background: var(--clay2); color: var(--cream); border: none; font-family: 'Jost', sans-serif; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background 0.25s; }
+  .btn-primary:hover { background: var(--terracotta); }
+  .btn-secondary { padding: 0.9rem 2.4rem; background: transparent; color: var(--clay2); border: 1px solid var(--clay); font-family: 'Jost', sans-serif; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.25s; }
+  .btn-secondary:hover { background: var(--sand); }
+  .hero-visual { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; }
+  .stone-circle { width: 380px; height: 380px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, var(--sand) 0%, var(--clay) 60%, var(--clay2) 100%); display: flex; align-items: center; justify-content: center; position: relative; box-shadow: inset -8px -8px 24px rgba(0,0,0,0.12), inset 4px 4px 16px rgba(255,255,255,0.3); }
+  .stone-circle::after { content: '✦'; font-size: 3rem; color: rgba(250,246,238,0.5); }
+  .orbit { position: absolute; border-radius: 50%; border: 1px dashed rgba(196,168,130,0.5); animation: spin 30s linear infinite; }
+  .orbit-1 { width: 440px; height: 440px; }
+  .orbit-2 { width: 520px; height: 520px; animation-duration: 45s; animation-direction: reverse; }
+  .orbit-dot { position: absolute; top: -4px; left: 50%; width: 8px; height: 8px; border-radius: 50%; background: var(--terracotta); transform: translateX(-50%); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .intro { padding: 6rem 5%; background: var(--sand); text-align: center; }
+  .section-label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 1rem; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; color: var(--dark); margin-bottom: 1.2rem; line-height: 1.2; }
+  .section-title em { font-style: italic; color: var(--clay2); }
+  .section-text { font-size: 0.95rem; line-height: 1.9; color: var(--stone); max-width: 600px; margin: 0 auto; }
+  .services { padding: 6rem 5%; background: var(--cream); }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3.5rem; }
+  .service-card { padding: 2.5rem 2rem; background: var(--sand); border-top: 3px solid var(--clay); transition: transform 0.25s, box-shadow 0.25s; }
+  .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(139,111,78,0.15); }
+  .service-icon { font-size: 2rem; margin-bottom: 1.2rem; display: block; }
+  .service-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; color: var(--dark); margin-bottom: 0.8rem; }
+  .service-desc { font-size: 0.88rem; line-height: 1.8; color: var(--stone); }
+  .how { padding: 6rem 5%; background: var(--dark); color: var(--cream); }
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 3.5rem; position: relative; }
+  .steps::before { content: ''; position: absolute; top: 2rem; left: 10%; right: 10%; height: 1px; background: var(--clay2); z-index: 0; }
+  .step { text-align: center; padding: 0 1.5rem; position: relative; z-index: 1; }
+  .step-num { width: 4rem; height: 4rem; border-radius: 50%; background: var(--clay2); color: var(--cream); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; margin: 0 auto 1.5rem; }
+  .step-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--sand); margin-bottom: 0.6rem; }
+  .step-desc { font-size: 0.82rem; line-height: 1.8; color: var(--clay); }
+  .stones { padding: 6rem 5%; background: var(--sand); overflow: hidden; }
+  .stones-row { display: flex; gap: 1.5rem; margin-top: 3rem; overflow-x: auto; padding-bottom: 1rem; }
+  .stones-row::-webkit-scrollbar { height: 4px; }
+  .stones-row::-webkit-scrollbar-track { background: var(--mist); }
+  .stones-row::-webkit-scrollbar-thumb { background: var(--clay); border-radius: 2px; }
+  .stone-card { min-width: 200px; padding: 2rem 1.5rem; text-align: center; background: var(--cream); flex-shrink: 0; }
+  .stone-gem { width: 70px; height: 70px; border-radius: 50%; margin: 0 auto 1rem; box-shadow: inset -3px -3px 8px rgba(0,0,0,0.15), inset 2px 2px 6px rgba(255,255,255,0.4); }
+  .stone-name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--dark); margin-bottom: 0.4rem; }
+  .stone-prop { font-size: 0.8rem; color: var(--stone); line-height: 1.6; }
+  .news { padding: 6rem 5%; background: var(--cream); }
+  .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3.5rem; }
+  .news-card { cursor: pointer; }
+  .news-img { height: 180px; margin-bottom: 1.2rem; background: var(--sand2); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; overflow: hidden; position: relative; }
+  .news-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--sand) 0%, var(--clay2) 100%); opacity: 0.15; transition: opacity 0.3s; }
+  .news-card:hover .news-img::after { opacity: 0.3; }
+  .news-date { font-size: 0.75rem; letter-spacing: 0.1em; color: var(--terracotta); margin-bottom: 0.5rem; text-transform: uppercase; }
+  .news-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--dark); margin-bottom: 0.6rem; line-height: 1.3; }
+  .news-excerpt { font-size: 0.84rem; line-height: 1.7; color: var(--stone); }
+  .consult { padding: 6rem 5%; background: var(--clay2); color: var(--cream); text-align: center; }
+  .consult .section-title { color: var(--cream); }
+  .consult .section-label { color: var(--sand); }
+  .consult .section-text { color: rgba(250,246,238,0.8); margin-bottom: 2.5rem; }
+  .consult-form { display: flex; gap: 1rem; max-width: 480px; margin: 0 auto; flex-wrap: wrap; justify-content: center; }
+  .consult-form input { flex: 1; min-width: 200px; padding: 0.85rem 1.2rem; background: rgba(250,246,238,0.15); border: 1px solid rgba(250,246,238,0.4); color: var(--cream); font-family: 'Jost', sans-serif; font-size: 0.9rem; outline: none; }
+  .consult-form input::placeholder { color: rgba(250,246,238,0.5); }
+  .consult-form input:focus { border-color: var(--sand); }
+  .btn-light { padding: 0.85rem 2rem; background: var(--cream); color: var(--clay2); border: none; font-family: 'Jost', sans-serif; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+  .btn-light:hover { background: var(--sand); }
+  .btn-light:disabled { opacity: 0.6; cursor: not-allowed; }
+  footer { padding: 3rem 5%; background: var(--dark); color: var(--clay); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.82rem; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--sand); }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { color: var(--clay); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--sand); }
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; text-align: center; }
+    .hero-sub { margin: 0 auto 2.5rem; }
+    .hero-btns { justify-content: center; }
+    .hero-visual { display: none; }
+    .services-grid, .news-grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: repeat(2, 1fr); }
+    .steps::before { display: none; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Камень & Звёзды</div>
+  <ul class="nav-links">
+    <li><a href="#services">Услуги</a></li>
+    <li><a href="#how">Как это работает</a></li>
+    <li><a href="#stones">Камни</a></li>
+    <li><a href="#news">Блог</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('consult').scrollIntoView({behavior:'smooth'})">Записаться</button>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-text">
+    <span class="hero-badge">✦ Астрологические украшения</span>
+    <h1 class="hero-title">Украшения,<br>созданные<br><em>звёздами для вас</em></h1>
+    <p class="hero-sub">Браслеты и украшения из натуральных камней, подобранных астрологом под вашу натальную карту. Носите энергию, которая помогает достигать жизненных целей.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('consult').scrollIntoView({behavior:'smooth'})">Заказать украшение</button>
+      <button class="btn-secondary" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">Узнать больше</button>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="orbit orbit-2"><div class="orbit-dot"></div></div>
+    <div class="orbit orbit-1"><div class="orbit-dot" style="background:var(--gold)"></div></div>
+    <div class="stone-circle"></div>
+  </div>
+</section>
+
+<section class="intro" id="about">
+  <p class="section-label">о нас</p>
+  <h2 class="section-title">Каждый камень — это <em>послание звёзд</em></h2>
+  <p class="section-text">Мы соединяем древнюю мудрость астрологии с красотой природных камней. Опытный астролог анализирует вашу натальную карту и создаёт украшение, которое усиливает нужные качества и помогает вам двигаться вперёд.</p>
+</section>
+
+<section class="services" id="services">
+  <div style="text-align:center">
+    <p class="section-label">что мы предлагаем</p>
+    <h2 class="section-title">Наши <em>услуги</em></h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-icon">🔮</span>
+      <h3 class="service-title">Украшение по натальной карте</h3>
+      <p class="service-desc">Астролог анализирует вашу карту и подбирает камни, усиливающие нужные планеты и помогающие в достижении конкретных целей.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">📿</span>
+      <h3 class="service-title">Браслет под задачу</h3>
+      <p class="service-desc">Расскажите, что сейчас важно — карьера, отношения, здоровье, творчество. Мы создадим украшение с камнями под вашу конкретную задачу.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">✨</span>
+      <h3 class="service-title">Астрологическая консультация</h3>
+      <p class="service-desc">Разбор натальной карты, анализ текущих транзитов и рекомендации по камням, которые поддержат вас в этот период жизни.</p>
+    </div>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <div style="text-align:center">
+    <p class="section-label">процесс</p>
+    <h2 class="section-title" style="color:var(--sand)">Как это <em style="color:var(--gold)">работает</em></h2>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-title">Оставляете заявку</div>
+      <p class="step-desc">Указываете дату, время и место рождения и описываете, что хотите изменить или усилить в своей жизни.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-title">Консультация с астрологом</div>
+      <p class="step-desc">Астролог анализирует натальную карту и определяет, какие камни подойдут именно вам.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-title">Создание украшения</div>
+      <p class="step-desc">Вручную создаём браслет или украшение из натуральных камней с учётом всех астрологических нюансов.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-title">Получаете и носите</div>
+      <p class="step-desc">Украшение приходит к вам с подробными рекомендациями астролога по активации камней.</p>
+    </div>
+  </div>
+</section>
+
+<section class="stones" id="stones">
+  <div style="text-align:center">
+    <p class="section-label">материалы</p>
+    <h2 class="section-title">Натуральные <em>камни силы</em></h2>
+  </div>
+  <div class="stones-row">
+    <div class="stone-card">
+      <div class="stone-gem" style="background:radial-gradient(circle at 35% 35%, #b388ff, #6200ea)"></div>
+      <div class="stone-name">Аметист</div>
+      <div class="stone-prop">Интуиция · Спокойствие · Защита</div>
+    </div>
+    <div class="stone-card">
+      <div class="stone-gem" style="background:radial-gradient(circle at 35% 35%, #ffd54f, #e65100)"></div>
+      <div class="stone-name">Тигровый глаз</div>
+      <div class="stone-prop">Сила воли · Уверенность · Успех</div>
+    </div>
+    <div class="stone-card">
+      <div class="stone-gem" style="background:radial-gradient(circle at 35% 35%, #a5d6a7, #1b5e20)"></div>
+      <div class="stone-name">Малахит</div>
+      <div class="stone-prop">Рост · Трансформация · Сердце</div>
+    </div>
+    <div class="stone-card">
+      <div class="stone-gem" style="background:radial-gradient(circle at 35% 35%, #90caf9, #0d47a1)"></div>
+      <div class="stone-name">Лазурит</div>
+      <div class="stone-prop">Мудрость · Истина · Общение</div>
+    </div>
+    <div class="stone-card">
+      <div class="stone-gem" style="background:radial-gradient(circle at 35% 35%, #ffccbc, #bf360c)"></div>
+      <div class="stone-name">Сердолик</div>
+      <div class="stone-prop">Творчество · Энергия · Радость</div>
+    </div>
+    <div class="stone-card">
+      <div class="stone-gem" style="background:radial-gradient(circle at 35% 35%, #eeeeee, #424242)"></div>
+      <div class="stone-name">Горный хрусталь</div>
+      <div class="stone-prop">Ясность · Усиление · Чистота</div>
+    </div>
+    <div class="stone-card">
+      <div class="stone-gem" style="background:radial-gradient(circle at 35% 35%, #f48fb1, #880e4f)"></div>
+      <div class="stone-name">Розовый кварц</div>
+      <div class="stone-prop">Любовь · Нежность · Гармония</div>
+    </div>
+  </div>
+</section>
+
+<section class="news" id="news">
+  <div style="text-align:center">
+    <p class="section-label">блог</p>
+    <h2 class="section-title">Новости и <em>статьи</em></h2>
+  </div>
+  <div class="news-grid">
+    <div class="news-card">
+      <div class="news-img">🌙</div>
+      <p class="news-date">28 апреля 2025</p>
+      <h3 class="news-title">Камни для Венеры: как привлечь любовь и гармонию</h3>
+      <p class="news-excerpt">Разбираем, какие натуральные камни активируют Венеру в натальной карте и помогают в отношениях.</p>
+    </div>
+    <div class="news-card">
+      <div class="news-img">⭐</div>
+      <p class="news-date">15 апреля 2025</p>
+      <h3 class="news-title">Меркурий ретроградный: что носить, чтобы защититься</h3>
+      <p class="news-excerpt">Рекомендации астролога: камни, которые помогают сохранять ясность мышления в сложный период.</p>
+    </div>
+    <div class="news-card">
+      <div class="news-img">🔯</div>
+      <p class="news-date">3 апреля 2025</p>
+      <h3 class="news-title">Как выбрать камень по знаку зодиака: полный гид</h3>
+      <p class="news-excerpt">Подробный разбор соответствий между знаками зодиака и натуральными камнями.</p>
+    </div>
+  </div>
+</section>
+
+<section class="consult" id="consult">
+  <p class="section-label">записаться</p>
+  <h2 class="section-title">Начните свой путь<br><em style="color:var(--sand2)">прямо сейчас</em></h2>
+  <p class="section-text">Оставьте имя и номер телефона или Telegram — астролог свяжется с вами в течение 24 часов.</p>
+  <div class="consult-form">
+    <input type="text" placeholder="Ваше имя" id="cname">
+    <input type="text" placeholder="Телефон или Telegram" id="ccontact">
+    <button class="btn-light" id="submit-btn" onclick="handleSubmit()">Отправить</button>
+  </div>
+  <p id="form-msg" style="margin-top:1.2rem;font-size:0.88rem;color:var(--sand);display:none"></p>
+</section>
+
+<footer>
+  <div class="footer-logo">Камень & Звёзды</div>
+  <div class="footer-links">
+    <a href="#services">Услуги</a>
+    <a href="#how">Как это работает</a>
+    <a href="#stones">Камни</a>
+    <a href="#news">Блог</a>
+    <a href="#consult">Контакты</a>
+  </div>
+  <div style="font-size:0.78rem">© 2025 Камень & Звёзды</div>
+</footer>
+
+<script>
+const TELEGRAM_TOKEN = '8530508120:AAEwIxPYt1zdKsZvat7-NTvPBFG6uZg7IO0';
+const CHAT_ID = '416666742';
+
+async function sendToTelegram(text) {
+  const chatId = CHAT_ID;
+  const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chat_id: chatId, text: text, parse_mode: 'HTML' })
+  });
+  const data = await res.json();
+  return data.ok;
+}
+
+async function handleSubmit() {
+  const name = document.getElementById('cname').value.trim();
+  const contact = document.getElementById('ccontact').value.trim();
+  const btn = document.getElementById('submit-btn');
+  const msg = document.getElementById('form-msg');
+
+  if (!name || !contact) {
+    alert('Пожалуйста, заполните имя и контакт');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Отправляем...';
+
+  const text = `✦ Новая заявка с лендинга!\n\n👤 Имя: ${name}\n📱 Контакт: ${contact}`;
+  const ok = await sendToTelegram(text);
+
+  if (ok) {
+    msg.textContent = '✦ Спасибо! Мы свяжемся с вами в течение 24 часов.';
+    msg.style.color = 'var(--sand)';
+    document.getElementById('cname').value = '';
+    document.getElementById('ccontact').value = '';
+  } else {
+    msg.textContent = '⚠ Не удалось отправить. Напишите нам напрямую в Telegram: @KamniHelpBot';
+    msg.style.color = '#ffccaa';
+  }
+
+  msg.style.display = 'block';
+  btn.disabled = false;
+  btn.textContent = 'Отправить';
+}
+</script>
+</body>
+</html>
